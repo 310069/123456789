@@ -3,625 +3,298 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>小龍的學習歷程作品集</title>
-    
-    <!-- 載入 Swiper 輪播與 FontAwesome 圖示 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <title>龍紫綺的學習歷程作品集</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- 引入高質感字體 -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
             --bg-cream: #fffdf9;      
-            --nav-dark: rgba(30, 34, 47, 0.85);      
+            --nav-dark: #1e222f;      
             --pastel-yellow: #fffaf0; 
             --pastel-purple: #f8f5ff; 
             --pastel-green: #f4faf6;  
             --text-dark: #2c3142;     
             --text-sub: #697080;
             --star-gold: #f4d068;     
-            --magic-glow-y: rgba(244, 208, 104, 0.35);
-            --magic-glow-p: rgba(182, 158, 255, 0.35);
-            --magic-glow-g: rgba(114, 219, 142, 0.3);
         }
 
+        * { box-sizing: border-box; }
+
         body { 
-            font-family: "Quicksand", "Noto Sans TC", sans-serif; 
+            font-family: "Noto Sans TC", sans-serif; 
             margin: 0; 
             background: var(--bg-cream); 
             color: var(--text-dark); 
-            overflow-x: hidden;
-            background-image: radial-gradient(rgba(244, 208, 104, 0.08) 1.5px, transparent 0);
-            background-size: 40px 40px;
-        }
-
-        /* 背景氣泡群 */
-        .aura-bg-container {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none;
-            z-index: -1;
-            overflow: hidden;
-            opacity: 0.6;
-        }
-        .aura-bubble { position: absolute; border-radius: 50%; filter: blur(80px); mix-blend-mode: multiply; }
-        .aura-1 { width: 600px; height: 600px; background: #fff2cc; top: -10%; left: -10%; }
-        .aura-2 { width: 500px; height: 500px; background: #f3e8ff; bottom: 10%; right: -5%; }
-        .aura-3 { width: 550px; height: 550px; background: #e6f9ec; top: 40%; left: 50%; transform: translateX(-50%); }
-
-        /* 仙女棒滑鼠粒子 */
-        .magic-particle {
-            position: fixed; pointer-events: none; font-size: 14px; color: var(--star-gold); z-index: 9999;
-            text-shadow: 0 0 8px rgba(244, 208, 104, 0.8); animation: particleFade 0.9s forwards cubic-bezier(0.1, 0.8, 0.3, 1);
-        }
-        @keyframes particleFade {
-            0 { transform: translate(-50%, -50%) scale(1.2) rotate(0deg); opacity: 1; }
-            100% { transform: translate(-50%, -100%) scale(0) rotate(270deg); opacity: 0; }
         }
 
         /* 導覽列 */
         header {
-            background: var(--nav-dark); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding: 0 6%; display: flex;
-            justify-content: space-between; align-items: center; height: 75px; color: white; position: sticky; top: 0; z-index: 1000; box-shadow: 0 8px 32px rgba(0,0,0,0.08);
-        }
-        .logo { font-size: 1.35rem; font-weight: 700; display: flex; align-items: center; gap: 10px; letter-spacing: 1px; }
-        .logo i { color: var(--star-gold); text-shadow: 0 0 10px rgba(244, 208, 104, 0.6); }
-        .nav { display: flex; list-style: none; gap: 8px; margin: 0; padding: 0; }
-        .nav-item { font-weight: 700; cursor: pointer; color: #cbd5e1; text-decoration: none; font-size: 0.9rem; padding: 10px 18px; border-radius: 20px; transition: all 0.4s; }
-        .nav-item:hover { color: white; background: rgba(255, 255, 255, 0.1); transform: translateY(-1px); }
-
-        /* 核心視覺區塊（排版優化） */
-        .hero-cinematic {
-            padding: 50px 0;
+            background: var(--nav-dark); 
+            padding: 0 6%; 
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 40px;
+            justify-content: space-between; 
+            align-items: center; 
+            height: 75px; 
+            color: white; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000;
         }
+        .logo { font-size: 1.35rem; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+        .logo i { color: var(--star-gold); }
+        .nav { display: flex; list-style: none; gap: 8px; margin: 0; padding: 0; }
+        .nav-item { font-weight: 700; cursor: pointer; color: #cbd5e1; text-decoration: none; font-size: 0.9rem; padding: 10px 18px; border-radius: 20px; transition: 0.3s; }
+        .nav-item:hover { color: white; background: rgba(255, 255, 255, 0.1); }
 
         /* 個人簡介區塊 */
+        .hero-cinematic { padding: 40px 0; display: flex; flex-direction: column; align-items: center; gap: 30px; }
         .profile-section {
-            max-width: 850px; width: 90%; display: flex; align-items: center; gap: 45px; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 35px 40px; border-radius: 32px; border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: 0 20px 50px rgba(165, 145, 100, 0.06); z-index: 20; box-sizing: border-box;
+            max-width: 850px; width: 90%; display: flex; align-items: center; gap: 40px; 
+            background: white; padding: 35px 40px; border-radius: 32px; 
+            border: 1px solid rgba(0, 0, 0, 0.05); box-shadow: 0 10px 30px rgba(0,0,0,0.03);
         }
-        .profile-avatar-wrapper { position: relative; width: 140px; height: 140px; flex-shrink: 0; }
-        .profile-avatar-wrapper::before { content: ''; position: absolute; top: -4px; left: -4px; right: -4px; bottom: -4px; border-radius: 50%; background: linear-gradient(135deg, var(--star-gold), #b69eff, #72db8e); z-index: -1; }
-        .profile-avatar { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid white; box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
+        .profile-avatar-wrapper { position: relative; width: 130px; height: 130px; flex-shrink: 0; }
+        .profile-avatar { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid #f4d068; }
         .profile-info { flex-grow: 1; }
-        .profile-name { font-size: 1.8rem; margin: 0 0 5px 0; font-weight: 700; color: var(--text-dark); display: flex; align-items: center; gap: 10px; }
-        .profile-tagline { font-size: 0.95rem; font-style: italic; color: #8b5cf6; margin: 0 0 12px 0; font-weight: 700; }
+        .profile-name { font-size: 1.8rem; margin: 0 0 5px 0; font-weight: 700; color: var(--text-dark); }
+        .profile-tagline { font-size: 0.95rem; color: #8b5cf6; margin: 0 0 12px 0; font-weight: 700; }
         .profile-desc { font-size: 0.95rem; line-height: 1.6; color: var(--text-sub); margin: 0 0 18px 0; }
-        .profile-highlights { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; list-style: none; padding: 0; margin: 0; border-top: 1px dashed rgba(0,0,0,0.08); padding-top: 15px; }
+        .profile-highlights { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; list-style: none; padding: 0; margin: 0; border-top: 1px dashed #e2e8f0; padding-top: 15px; }
         .highlight-item { font-size: 0.9rem; color: var(--text-dark); display: flex; align-items: center; gap: 8px; font-weight: 700; }
-        .highlight-item i { color: var(--star-gold); font-size: 0.85rem; }
-
-        /* ==================== 經典輪播圖樣式 (完美重現 IMG_0273.jpg) ==================== */
-        .carousel-container {
-            width: 100%;
-            position: relative;
-            padding: 20px 0 40px;
-            overflow: hidden;
-        }
-        .hero-swiper {
-            width: 100%;
-            padding: 10px 0 30px;
-        }
-        .hero-swiper .swiper-slide {
-            width: 60%; /* 讓左右兩側卡片微微露出 */
-            max-width: 750px;
-            height: 400px;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            transition: transform 0.4s ease, opacity 0.4s ease;
-            opacity: 0.4;
-            transform: scale(0.9); /* 非主圖縮小 */
-        }
-        /* 當前正中央的主要大圖 */
-        .hero-swiper .swiper-slide-active {
-            opacity: 1;
-            transform: scale(1);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.18);
-        }
-        .hero-swiper .swiper-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* 經典左右導覽箭頭 */
-        .swiper-button-next, .swiper-button-prev {
-            width: 50px;
-            height: 50px;
-            background: white;
-            border-radius: 50%;
-            color: var(--text-dark);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-        }
-        .swiper-button-next::after, .swiper-button-prev::after {
-            font-size: 1.1rem;
-            font-weight: bold;
-        }
-        .swiper-button-next:hover, .swiper-button-prev:hover {
-            background: var(--text-dark);
-            color: white;
-            transform: scale(1.05);
-        }
-        /* 修正導覽點點樣式 */
-        .hero-swiper .swiper-pagination-bullet {
-            width: 10px;
-            height: 10px;
-            background: #cbd5e1;
-            opacity: 1;
-            margin: 0 6px !important;
-            transition: all 0.3s ease;
-        }
-        .hero-swiper .swiper-pagination-bullet-active {
-            background: #ef4444; /* 精準復刻圖中的紅色活躍點 */
-            width: 12px;
-            height: 12px;
-        }
+        .highlight-item i { color: var(--star-gold); }
 
         /* 主容器與標題 */
-        .container { max-width: 960px; margin: 20px auto 40px; padding: 0 25px; position: relative; z-index: 20; }
-        .category-title { 
-            font-size: 1.8rem; color: var(--text-dark); margin: 60px 0 35px; display: flex; align-items: center; gap: 12px; font-weight: 700;
-            background: linear-gradient(135deg, #1e222f 0%, #475569 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-        .category-title span { -webkit-text-fill-color: initial; color: var(--star-gold); font-size: 1.6rem; text-shadow: 0 2px 8px rgba(244,208,104,0.4); }
+        .container { max-width: 900px; margin: 0 auto 40px; padding: 0 20px; }
+        .category-title { font-size: 1.6rem; color: var(--text-dark); margin: 50px 0 25px; display: flex; align-items: center; gap: 10px; font-weight: 700; }
 
-        .section-divider-wrapper { position: relative; margin: 60px 0; display: flex; justify-content: center; align-items: center; }
-        .section-divider { width: 100%; border: none; border-top: 2px dashed #cbd5e1; transform: scaleX(0); transform-origin: center; }
-        .divider-spark { position: absolute; background: white; padding: 0 15px; color: var(--star-gold); font-size: 1.1rem; opacity: 0; transform: scale(0); transition: all 0.6s ease; }
-
-        .report-list { display: grid; grid-template-columns: 1fr; gap: 25px; }
+        .report-list { display: flex; flex-direction: column; gap: 20px; }
         
-        /* 作品卡片（點擊可觸發放大簡介） */
+        /* 作品卡片 */
         .report-item {
-            display: flex; border-radius: 24px; overflow: hidden; height: 160px; position: relative; 
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
-            border: 1px solid rgba(0, 0, 0, 0.03); background-clip: padding-box; cursor: pointer;
-            transition: all 0.4s ease;
+            display: flex; border-radius: 20px; overflow: hidden; min-height: 150px; position: relative; 
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03); border: 1px solid #eee; transition: all 0.3s ease;
+            text-decoration: none; color: inherit;
         }
         .report-item.color-yellow { background: linear-gradient(145deg, #ffffff, var(--pastel-yellow)); }
         .report-item.color-purple { background: linear-gradient(145deg, #ffffff, var(--pastel-purple)); }
         .report-item.color-green { background: linear-gradient(145deg, #ffffff, var(--pastel-green)); }
         
-        .report-item.color-yellow:hover { border-color: #f4d068; box-shadow: 0 15px 35px var(--magic-glow-y); }
-        .report-item.color-purple:hover { border-color: #cbb5ff; box-shadow: 0 15px 35px var(--magic-glow-p); }
-        .report-item.color-green:hover { border-color: #aae2b9; box-shadow: 0 15px 35px var(--magic-glow-g); }
+        .report-item:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08); }
         
-        .item-img { width: 160px; min-width: 160px; height: 160px; background: #fff; overflow: hidden; position: relative; }
-        .item-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
-        .report-item:hover .item-img img { transform: scale(1.08); }
+        .item-img { width: 160px; min-width: 160px; height: 100%; background: #fff; overflow: hidden; }
+        .item-img img { width: 100%; height: 100%; object-fit: cover; }
         
-        .item-content { padding: 25px 30px; display: flex; flex-direction: column; justify-content: flex-start; flex-grow: 1; padding-right: 150px; }
-        .item-content h3 { margin: 0 0 8px; font-size: 1.25rem; color: var(--text-dark); font-weight: 700; }
-        .item-content p { margin: 0; font-size: 0.92rem; color: var(--text-sub); line-height: 1.6; }
+        .item-content { padding: 20px 25px; display: flex; flex-direction: column; justify-content: center; flex-grow: 1; padding-right: 140px; }
+        .item-content h3 { margin: 0 0 8px; font-size: 1.2rem; color: var(--text-dark); font-weight: 700; }
+        .item-content p { margin: 0; font-size: 0.9rem; color: var(--text-sub); line-height: 1.5; }
         
         .btn-browse {
-            position: absolute; right: 30px; bottom: 25px; background: var(--text-dark); color: white;
-            padding: 10px 22px; font-size: 0.85rem; font-weight: 700; border-radius: 14px; transition: all 0.3s;
-            box-shadow: 0 4px 12px rgba(44, 49, 66, 0.1); display: flex; align-items: center; gap: 6px;
+            position: absolute; right: 25px; top: 50%; transform: translateY(-50%); background: var(--text-dark); color: white;
+            padding: 10px 20px; font-size: 0.85rem; font-weight: 700; border-radius: 12px; display: flex; align-items: center; gap: 6px;
         }
-        .report-item:hover .btn-browse { background: #1e222f; transform: scale(1.03); }
+        .report-item:hover .btn-browse { background: #334155; }
 
-        /* ==================== 🔮 簡介彈出視窗 (Modal Pop-up) ==================== */
-        .magic-modal-overlay {
+        /* 簡介 Modal 視窗 */
+        .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 17, 26, 0.6); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-            z-index: 2000; display: flex; justify-content: center; align-items: center;
-            opacity: 0; pointer-events: none; transition: opacity 0.4s ease; padding: 20px; box-sizing: border-box;
+            background: rgba(0, 0, 0, 0.6); z-index: 2000; display: none;
+            justify-content: center; align-items: center; padding: 20px;
         }
-        .magic-modal-overlay.active { opacity: 1; pointer-events: auto; }
-
-        .magic-modal-box {
-            background: white; max-width: 680px; width: 100%; border-radius: 32px;
-            box-shadow: 0 30px 70px rgba(0,0,0,0.3); position: relative; overflow: hidden;
-            transform: scale(0.85) translateY(20px); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.15);
-            display: flex; flex-direction: column; max-height: 85vh;
+        .modal-overlay.active { display: flex; }
+        .modal-box {
+            background: white; max-width: 600px; width: 100%; border-radius: 24px;
+            position: relative; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.2);
         }
-        .magic-modal-overlay.active .magic-modal-box { transform: scale(1) translateY(0); }
-
-        /* 右上角優雅關閉鍵 */
-        .modal-close-btn {
-            position: absolute; top: 20px; right: 20px; width: 40px; height: 40px;
-            background: rgba(255, 255, 255, 0.9); border: none; border-radius: 50%;
-            color: var(--text-dark); font-size: 1.2rem; cursor: pointer; display: flex;
-            justify-content: center; align-items: center; z-index: 10; transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        .modal-close {
+            position: absolute; top: 15px; right: 15px; width: 35px; height: 35px;
+            background: rgba(255,255,255,0.8); border: none; border-radius: 50%; font-size: 1.2rem; cursor: pointer;
         }
-        .modal-close-btn:hover { background: var(--text-dark); color: white; transform: rotate(90deg); }
-
-        .modal-hero-img { width: 100%; height: 280px; object-fit: cover; background: #f0f0f0; }
-        .modal-body { padding: 35px; overflow-y: auto; }
-        .modal-title { margin: 0 0 12px 0; font-size: 1.6rem; font-weight: 700; color: var(--text-dark); }
-        .modal-desc { font-size: 1rem; line-height: 1.7; color: var(--text-sub); margin: 0 0 30px 0; }
-        .modal-footer { display: flex; justify-content: flex-end; }
-        .modal-action-btn {
-            background: var(--text-dark); color: white; text-decoration: none; padding: 12px 30px;
-            font-size: 0.95rem; font-weight: 700; border-radius: 16px; box-shadow: 0 6px 20px rgba(30,34,47,0.2);
-            display: flex; align-items: center; gap: 8px; transition: 0.3s;
+        .modal-img { width: 100%; height: 220px; object-fit: cover; }
+        .modal-content { padding: 25px; }
+        .modal-title { margin: 0 0 10px 0; font-size: 1.4rem; color: var(--text-dark); }
+        .modal-desc { font-size: 0.95rem; color: var(--text-sub); line-height: 1.6; margin-bottom: 25px; }
+        .modal-btn {
+            display: inline-block; background: var(--text-dark); color: white; text-decoration: none;
+            padding: 12px 24px; font-size: 0.9rem; font-weight: 700; border-radius: 12px;
         }
-        .modal-action-btn:hover { background: #1e222f; transform: translateY(-2px); }
 
-        footer { text-align: center; padding: 65px; background: #fff; color: var(--text-sub); margin-top: 100px; border-top: 1px dashed #e2dad0; font-size: 0.9rem; font-weight: 700; }
+        footer { text-align: center; padding: 40px; background: #fff; color: var(--text-sub); border-top: 1px solid #eee; font-size: 0.85rem; margin-top: 60px; }
 
         @media (max-width: 768px) {
-            header { height: auto; padding: 15px 5%; flex-direction: column; gap: 12px; }
-            .nav { flex-wrap: wrap; justify-content: center; gap: 4px; }
-            .hero-cinematic { padding: 30px 0; gap: 25px; }
-            .profile-section { flex-direction: column; text-align: center; padding: 30px 20px; gap: 20px; }
-            .profile-highlights { grid-template-columns: 1fr; justify-items: center; }
-            .hero-swiper .swiper-slide { width: 85%; height: 260px; }
-            .report-item { height: auto; flex-direction: column; border-radius: 24px; }
-            .item-img { width: 100%; height: 180px; }
-            .item-content { padding: 22px; padding-bottom: 80px; padding-right: 22px; }
-            .btn-browse { width: calc(100% - 44px); right: 22px; bottom: 18px; text-align: center; justify-content: center; box-sizing: border-box; }
-            .modal-hero-img { height: 180px; }
+            header { height: auto; padding: 15px; flex-direction: column; gap: 10px; }
+            .profile-section { flex-direction: column; text-align: center; padding: 25px; }
+            .profile-highlights { grid-template-columns: 1fr; }
+            .report-item { flex-direction: column; }
+            .item-img { width: 100%; height: 160px; }
+            .item-content { padding: 20px; padding-bottom: 70px; }
+            .btn-browse { top: auto; bottom: 15px; right: 20px; transform: none; width: calc(100% - 40px); justify-content: center; }
         }
     </style>
 </head>
 <body>
 
-<!-- 背景流體效果 -->
-<div class="aura-bg-container">
-    <div class="aura-bubble aura-1" id="aura1"></div>
-    <div class="aura-bubble aura-2" id="aura2"></div>
-    <div class="aura-bubble aura-3" id="aura3"></div>
-</div>
-
-<!-- 導覽列 -->
 <header>
-    <div class="logo"><i class="fa-solid fa-wand-magic-sparkles"></i> 小龍的魔法書</div>
+    <div class="logo"><i class="fa-solid fa-wand-magic-sparkles"></i> 龍紫綺的魔法書</div>
     <div class="nav">
-        <a href="#self" class="nav-item">🔮 自主學習</a>
-        <a href="#explore" class="nav-item">🧪 探究實作</a>
-        <a href="#extend" class="nav-item">📜 科目延伸</a>
+        <div onclick="document.getElementById('self').scrollIntoView({behavior:'smooth'})" class="nav-item">🔮 自主學習</div>
+        <div onclick="document.getElementById('explore').scrollIntoView({behavior:'smooth'})" class="nav-item">🧪 探究實作</div>
+        <div onclick="document.getElementById('extend').scrollIntoView({behavior:'smooth'})" class="nav-item">📜 科目延伸</div>
     </div>
 </header>
 
-<section class="hero-cinematic">
-    <!-- 個人簡介卡片 -->
-    <div class="profile-section" id="profileCard">
+<div class="hero-cinematic">
+    <div class="profile-section">
         <div class="profile-avatar-wrapper">
             <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" alt="個人照" class="profile-avatar">
         </div>
         <div class="profile-info">
-            <h1 class="profile-name">陳小龍 <span style="font-size: 1.2rem;">Xiao-Long Chen</span></h1>
-            <p class="profile-tagline">✦ 探求真理的生醫魔法使 ✧</p>
-            <p class="profile-desc">
-                歡迎來到我的個人學習歷程魔法書。我熱愛生命科學與食品化學，擅長透過實驗探究日常生活中的科學原理。在這裡記錄了我高中三年的自主學習、科學實驗成果與課外卓越歷程。
-            </p>
+            <h1 class="profile-name">龍紫綺</h1>
+            <p class="profile-tagline">✦ 努力嘗試各種料理 ✧</p>
+            <p class="profile-desc">歡迎來到我的個人學習歷程魔法書。我熱愛和料理有關的事物。在這裡記錄了我高中三年的自主學習、科學實驗成果。</p>
             <ul class="profile-highlights">
-                <li class="highlight-item"><i class="fa-solid fa-wand-magic"></i> 生物研究社 — 社長</li>
-                <li class="highlight-item"><i class="fa-solid fa-flask"></i> 2025 全國科展 — 佳作</li>
-                <li class="highlight-item"><i class="fa-solid fa-graduation-cap"></i> 台大醫學培訓營 — 結業</li>
-                <li class="highlight-item"><i class="fa-solid fa-dna"></i> 核心專長 — 生物化學實驗</li>
+                <li class="highlight-item"><i class="fa-solid fa-user-group"></i> 曾擔任社團副社長</li>
+                <li class="highlight-item"><i class="fa-solid fa-book-bookmark"></i> 英文小老師</li>
+                <li class="highlight-item"><i class="fa-solid fa-earth-americas"></i> 地理小老師</li>
             </ul>
         </div>
     </div>
-    
-    <!-- 經典大氣輪播圖區塊 -->
-    <div class="carousel-container">
-        <div class="swiper hero-swiper">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide"><img src="https://drive.google.com/thumbnail?id=1BLQp_YwzvBMQ1EGHSptBdOSrSstkpBiq&sz=w1200" alt="精選"></div>
-                <div class="swiper-slide"><img src="https://drive.google.com/thumbnail?id=1fcWpFNknNp4wrdjg6S929IdsBgVj3N-G&sz=w1200" alt="精選"></div>
-                <div class="swiper-slide"><img src="https://drive.google.com/thumbnail?id=1mii-dhymV1mSH_chrA2lDDFfxR2egHvT&sz=w1200" alt="精選"></div>
-            </div>
-            <!-- 下方導覽點點 -->
-            <div class="swiper-pagination"></div>
-            <!-- 左右箭頭導覽鍵 -->
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-        </div>
-    </div>
-</section>
+</div>
 
 <div class="container">
     
-    <!-- ==================== 自主學習區塊 ==================== -->
-    <h2 id="self" class="category-title-animate category-title"><span>🔮</span> 自主學習成果</h2>
+    <!-- 自主學習 -->
+    <h2 id="self" class="category-title">🔮 自主學習成果</h2>
     <div class="report-list">
-        
-        <div class="report-item color-yellow GSAP-card" 
-             data-title="自主學習-營養專題研究" 
-             data-img="https://drive.google.com/thumbnail?id=1BLQp_YwzvBMQ1EGHSptBdOSrSstkpBiq&sz=w800"
-             data-desc="本研究深入探討現代營養學中的三大營養素配比，並結合穿戴式裝置追蹤長達兩個月的個人化膳食計畫。透過嚴謹的數據分析，證實微量元素對於日常專注力與抗疲勞的顯著影響，是一份結合生化理論與生活實作的整合性報告。"
-             data-link="https://canva.link/1fpjzu0lrkaytij">
-            <div class="item-img">
-                <img src="https://drive.google.com/thumbnail?id=1BLQp_YwzvBMQ1EGHSptBdOSrSstkpBiq&sz=w400" alt="營養">
-            </div>
+        <div class="report-item color-yellow" onclick="openModal('自主學習-營養', 'https://drive.google.com/thumbnail?id=1BLQp_YwzvBMQ1EGHSptBdOSrSstkpBiq&sz=w800', '這是我第一次參加營隊，在這體驗到了很多新事物也認識了來自各種不同學校的人，活動中除了動手做的課程之外含有各種小遊戲讓學習變得更有趣，跟著我憶起來探索吧~~', 'https://canva.link/1fpjzu0lrkaytij')">
+            <div class="item-img"><img src="https://drive.google.com/thumbnail?id=1BLQp_YwzvBMQ1EGHSptBdOSrSstkpBiq&sz=w400" alt="封面"></div>
             <div class="item-content">
                 <h3>自主學習-營養</h3>
-                <p>探索現代營養學與日常飲食調配，內含個人化膳食計畫與深入的健康數據追蹤分析。</p>
+                <p>探索各種食物所含的營養和熱量，並和夥伴一起完成上台報告</p>
             </div>
-            <span class="btn-browse">檢視簡介</span>
+            <div class="btn-browse">檢視簡介</div>
         </div>
 
-        <div class="report-item color-purple GSAP-card"
-             data-title="自主學習-蔬果加工與食品保存原理"
-             data-img="https://drive.google.com/thumbnail?id=1J5vemPYfe3BbquALo21iAequBNLQwBiK&sz=w800"
-             data-desc="食品加工技術實作！詳細紀錄並比對蔬菜與水果在不同滲透壓（鹽糖漬）、高溫殺菌與脫水乾燥下的細胞結構變化。報告內含完整的實驗步驟照片、控制變因分析與最終成品長達一個月的保存觀察日誌。"
-             data-link="https://canva.link/cgmaxnv4ekhbalb">
-            <div class="item-img">
-                <img src="https://drive.google.com/thumbnail?id=1J5vemPYfe3BbquALo21iAequBNLQwBiK&sz=w400" alt="蔬果加工">
-            </div>
+        <div class="report-item color-purple" onclick="openModal('自主學習-蔬果加工', 'https://drive.google.com/thumbnail?id=1J5vemPYfe3BbquALo21iAequBNLQwBiK&sz=w800', '這門課程帶給我很多蔬果相關知識，最重要的是學會如何將其運用在日常生活中，因為每種蔬果的特性不同，所以我們必須挑選合適的加工法，讓食物能狗延長保存又能夠增添風味', 'https://canva.link/cgmaxnv4ekhbalb')">
+            <div class="item-img"><img src="https://drive.google.com/thumbnail?id=1J5vemPYfe3BbquALo21iAequBNLQwBiK&sz=w400" alt="封面"></div>
             <div class="item-content">
                 <h3>自主學習-蔬果加工</h3>
-                <p>食品加工技術實作！詳細紀錄蔬菜與水果的加工原理、實驗步驟與成品保存成果。</p>
+                <p>透過線上課程學習相關知識外，還有自製泡菜!!</p>
             </div>
-            <span class="btn-browse">檢視簡介</span>
+            <div class="btn-browse">檢視簡介</div>
         </div>
 
-        <div class="report-item color-green GSAP-card"
-             data-title="自主學習-嬰幼兒副食品營養調製與分析"
-             data-img="https://drive.google.com/thumbnail?id=1QC5CujLedKgdHV2gyDfpJyZ19TPjz0IZ&sz=w800"
-             data-desc="從嬰幼兒消化系統發展與家政生物角度出發，解構不同月齡階段副食品的蛋白質分子型態與營養配比。並透過實際烹調與質地測試，設計出符合吞嚥發展的黃金比例菜單。"
-             data-link="https://canva.link/ekzjir69k3zza13">
-            <div class="item-img">
-                <img src="https://drive.google.com/thumbnail?id=1QC5CujLedKgdHV2gyDfpJyZ19TPjz0IZ&sz=w400" alt="副食品">
-            </div>
+        <div class="report-item color-green" onclick="openModal('自主學習-副食品分析', 'https://drive.google.com/thumbnail?id=1QC5CujLedKgdHV2gyDfpJyZ19TPjz0IZ&sz=w800', '製作寶寶副食品沒我們想像中的容易，需要花費很多心力去了解寶寶該吃什麼，餅乾的外型要如何設計都是產品考量的關鍵!!', 'https://canva.link/9s92lb9ic8f4jiw')">
+            <div class="item-img"><img src="https://drive.google.com/thumbnail?id=1QC5CujLedKgdHV2gyDfpJyZ19TPjz0IZ&sz=w400" alt="封面"></div>
             <div class="item-content">
                 <h3>自主學習-副食品分析</h3>
-                <p>從嬰幼兒發展與家政生物角度出發，解構不同成長階段副食品的營養配比與調製要點。</p>
+                <p>比較完各大寶寶副食品才明白：美味只是基本，能幫助寶寶發展的營養才是關鍵！</p>
             </div>
-            <span class="btn-browse">檢視簡介</span>
+            <div class="btn-browse">檢視簡介</div>
         </div>
 
-        <div class="report-item color-yellow GSAP-card"
-             data-title="台大醫學營隊卓越歷程"
-             data-img="https://drive.google.com/thumbnail?id=1CNoDGUqpFgi2YYEuhn7mS9XNuI9MAnSG&sz=w800"
-             data-desc="參與台大醫學營期間的實務操作精華紀錄！內容包含基礎解剖學概念、模擬臨床問診思維演練以及基因剪輯小組簡報歷程。這場營隊不僅拓展了我的生醫視野，更奠定了我未來投身生技醫療研究的決心。"
-             data-link="https://canva.link/yr95uiu38jmteg7">
-            <div class="item-img">
-                <img src="https://drive.google.com/thumbnail?id=1CNoDGUqpFgi2YYEuhn7mS9XNuI9MAnSG&sz=w400" alt="台大醫學">
-            </div>
+        <div class="report-item color-yellow" onclick="openModal('台大醫學營隊成果', 'https://drive.google.com/thumbnail?id=1CNoDGUqpFgi2YYEuhn7mS9XNuI9MAnSG&sz=w800', '講座邀請到許多知名醫師前來主講，他們運用極佳的口條與幽默感，將原本專業的內容轉化為生動精彩的分享。', 'https://canva.link/yr95uiu38jmteg7')">
+            <div class="item-img"><img src="https://drive.google.com/thumbnail?id=1CNoDGUqpFgi2YYEuhn7mS9XNuI9MAnSG&sz=w400" alt="封面"></div>
             <div class="item-content">
                 <h3>台大醫學營隊成果</h3>
-                <p>參與頂尖大學醫學營隊的實務操作與學習紀錄，點燃對醫學與生醫領域的深度探索熱情。</p>
+                <p>這門課程帶我廣泛探索了醫學領域中不同專科的專業內容。</p>
             </div>
-            <span class="btn-browse">檢視簡介</span>
+            <div class="btn-browse">檢視簡介</div>
         </div>
-
     </div>
 
-    <div class="section-divider-wrapper">
-        <hr class="section-divider"><div class="divider-spark">✨</div>
-    </div>
-
-    <!-- ==================== 探究區塊 ==================== -->
-    <h2 id="explore" class="category-title-animate category-title"><span>🧪</span> 探究與實作成果</h2>
+    <!-- 探究實作 -->
+    <h2 id="explore" class="category-title">🧪 探究與實作成果</h2>
     <div class="report-list">
-
-        <div class="report-item color-purple GSAP-card"
-             data-title="科學探究-彭巴效應流體力學分析"
-             data-img="https://drive.google.com/thumbnail?id=1U5uxjaKjWM4wWr4LtL9kmISBK7syRo3r&sz=w800"
-             data-desc="為什麼熱水有時比冷水結冰更快？針對物理界懸而未決的『彭巴效應（Mpemba effect）』展開科學探究。透過精密控制溫差、水質與蒸發變因，建立結冰時間的動態數據模型，深度剖析對流與溶解氣體帶來的影響。"
-             data-link="https://canva.link/yb6sksofiu0402j">
-            <div class="item-img">
-                <img src="https://drive.google.com/thumbnail?id=1U5uxjaKjWM4wWr4LtL9kmISBK7syRo3r&sz=w400" alt="彭巴效應">
-            </div>
+        <div class="report-item color-purple" onclick="openModal('探究與實作-彭巴效應', 'https://drive.google.com/thumbnail?id=1U5uxjaKjWM4wWr4LtL9kmISBK7syRo3r&sz=w800', '在進行實驗前，我們團隊先共同確立實驗目標並擬定預報，藉此優化實際操作時的流程與默契。 這項實驗究竟為我們揭開了哪些看似平常卻不可思議的生活現象？以下將帶領大家一同探究其中的奧秘', 'https://canva.link/yb6sksofiu0402j')">
+            <div class="item-img"><img src="https://drive.google.com/thumbnail?id=1U5uxjaKjWM4wWr4LtL9kmISBK7syRo3r&sz=w400" alt="封面"></div>
             <div class="item-content">
                 <h3>探究與實作-彭巴效應</h3>
-                <p>針對特定自然現象展開科學探究，包含嚴謹的實驗假設、變因控制與動態數據模型分析。</p>
+                <p>生活中的有趣現象激發了我的好奇心，促使我透過實證與資料查證，深入探討其背後的真實性。</p>
             </div>
-            <span class="btn-browse">檢視簡介</span>
+            <div class="btn-browse">檢視簡介</div>
         </div>
 
-        <div class="report-item color-green GSAP-card"
-             data-title="校園骨牌機構設計競賽"
-             data-img="https://drive.google.com/thumbnail?id=1UEbTnrr8-P9m-pIaAdYPeyREqC19w5kC&sz=w800"
-             data-desc="團隊合作與機構設計的完美結晶！負責計算物理軌道、重力加速度與槓桿連鎖反應。在比賽中成功利用廢棄材料打造出五道具備物理力學亮點的關卡，勇奪校級骨牌競賽之最佳機構設計獎項。"
-             data-link="https://canva.link/lkof6p5tg4qvmw4">
-            <div class="item-img">
-                <img src="https://drive.google.com/thumbnail?id=1UEbTnrr8-P9m-pIaAdYPeyREqC19w5kC&sz=w400" alt="骨牌">
-            </div>
+        <div class="report-item color-green" onclick="openModal('高二骨牌比賽', 'https://drive.google.com/thumbnail?id=1UEbTnrr8-P9m-pIaAdYPeyREqC19w5kC&sz=w800', '本組負責社會領域的關卡設計，將四大古文明的歷史特色巧妙設計為連接各區的軌道；當骨牌依序倒下時，便能生動展現出不同文明的文化底蘊。', 'https://canva.link/lkof6p5tg4qvmw4')">
+            <div class="item-img"><img src="https://drive.google.com/thumbnail?id=1UEbTnrr8-P9m-pIaAdYPeyREqC19w5kC&sz=w400" alt="封面"></div>
             <div class="item-content">
                 <h3>高二骨牌比賽</h3>
-                <p>團隊合作與機構設計的精彩碰撞！精密計算物理軌道、重力加速度與連鎖反應的歷程紀錄。</p>
+                <p>展現團隊默契與機構設計的完美結合！我們將創意融會貫通於物理學知識中，成功引發了一連串完美的骨牌連鎖反應</p>
             </div>
-            <span class="btn-browse">檢視簡介</span>
+            <div class="btn-browse">檢視簡介</div>
         </div>
-
     </div>
 
-    <div class="section-divider-wrapper">
-        <hr class="section-divider"><div class="divider-spark">✨</div>
-    </div>
-
-    <!-- ==================== 科目延伸區塊 ==================== -->
-    <h2 id="extend" class="category-title-animate category-title"><span>📜</span> 學科延伸專題</h2>
+    <!-- 科目延伸 -->
+    <h2 id="extend" class="category-title">📜 學科延伸專題</h2>
     <div class="report-list">
-
-        <div class="report-item color-yellow GSAP-card"
-             data-title="選修生物專題延伸探討"
-             data-img="https://drive.google.com/thumbnail?id=1mii-dhymV1mSH_chrA2lDDFfxR2egHvT&sz=w800"
-             data-desc="針對細胞膜運輸機制與訊息傳導途徑展開進階文獻探討。結合課堂所學之主動運輸理論，閱讀國外最新學術期刊，並利用手繪資訊圖表重現複雜的分子機轉鏈，展現自主探究的學術潛能。"
-             data-link="https://canva.link/gb7k1j1pvpmwqh4">
-            <div class="item-img">
-                <img src="https://drive.google.com/thumbnail?id=1mii-dhymV1mSH_chrA2lDDFfxR2egHvT&sz=w400" alt="選修生物">
-            </div>
+        <div class="report-item color-yellow" onclick="openModal('選修生物 1', 'https://drive.google.com/thumbnail?id=1mii-dhymV1mSH_chrA2lDDFfxR2egHvT&sz=w800', '透過三大營養素檢測、細胞滲透現象觀測，以及酵素活性與發酵速率的變因實驗，全面探究生物分子特性與基礎生理機制', 'https://canva.link/gb7k1j1pvpmwqh4')">
+            <div class="item-img"><img src="https://drive.google.com/thumbnail?id=1mii-dhymV1mSH_chrA2lDDFfxR2egHvT&sz=w400" alt="封面"></div>
             <div class="item-content">
                 <h3>選修生物 1</h3>
-                <p>高中生物核心課堂的延伸探索，針對細胞學、分子生物或生理機能進行進階文獻探討。</p>
+                <p>高中生物核心課堂的延伸探索，針對細胞學、分子生物或生理機能進行深度探討</p>
             </div>
-            <span class="btn-browse">檢視簡介</span>
+            <div class="btn-browse">檢視簡介</div>
         </div>
 
-        <div class="report-item color-purple GSAP-card"
-             data-title="高級英文作文與批判性思考"
-             data-img="https://drive.google.com/thumbnail?id=1NaJC_r5gr5XfXEbxjlBdhCugFaqviG07&sz=w800"
-             data-desc="精選多篇邏輯論證嚴謹、語彙豐富的英文寫作專案。內容涵蓋全球環境永續議題、AI科技倫理探討等，展現優異的英語文修辭、長篇章架構組織與獨立批判思考之高級素養。"
-             data-link="https://canva.link/u8k6po5bt7xmegp">
-            <div class="item-img">
-                <img src="https://drive.google.com/thumbnail?id=1NaJC_r5gr5XfXEbxjlBdhCugFaqviG07&sz=w400" alt="英文作文">
-            </div>
+        <div class="report-item color-purple" onclick="openModal('英文作文選修', 'https://drive.google.com/thumbnail?id=1NaJC_r5gr5XfXEbxjlBdhCugFaqviG07&sz=w800', '本專案精選多篇架構嚴謹、詞彙豐富的英文寫作，深入研討環境永續及 AI 科技倫理等當代議題，顯著提升了我在專業領域的英語詞彙與寫作技巧', 'https://canva.link/u8k6po5bt7xmegp')">
+            <div class="item-img"><img src="https://drive.google.com/thumbnail?id=1NaJC_r5gr5XfXEbxjlBdhCugFaqviG07&sz=w400" alt="封面"></div>
             <div class="item-content">
                 <h3>英文作文選修</h3>
-                <p>精選多篇邏輯架構完整的寫作作品，展現個人英文批判性思考、修辭與進階語文素養。</p>
+                <p>透過多元文體的寫作鍛鍊，以及與夥伴共同進行的口說實戰演練，讓我在書面與口頭表達能力上都更上一層樓。</p>
             </div>
-            <span class="btn-browse">檢視簡介</span>
+            <div class="btn-browse">檢視簡介</div>
         </div>
 
-        <div class="report-item color-green GSAP-card"
-             data-title="高一歷史人文實地考察報告"
-             data-img="https://drive.google.com/thumbnail?id=1vRDUiJX49vx9UqElPHq6RVWPb95SZSqy&sz=w800"
-             data-desc="實地走訪北台灣歷史聚落與古蹟遺址，結合田野調查、文獻爬梳與在地居民訪談。將空間地景與歷史時間軸交織，整合出一份具備人文關懷與在地社會變遷發展的深度考察專案。"
-             data-link="https://canva.link/3gydso53e81s9it">
-            <div class="item-img">
-                <img src="https://drive.google.com/thumbnail?id=1vRDUiJX49vx9UqElPHq6RVWPb95SZSqy&sz=w400" alt="歷史">
-            </div>
+        <div class="report-item color-green" onclick="openModal('高一校外教學-歷史', 'https://drive.google.com/thumbnail?id=1vRDUiJX49vx9UqElPHq6RVWPb95SZSqy&sz=w800', '實地踏查北台灣歷史聚落與古蹟，不僅帶我梳理了在地布袋戲的發展脈絡，更深化了我對台灣特定歷史時期社會背景的認識。', 'https://canva.link/3gydso53e81s9it')">
+            <div class="item-img"><img src="https://drive.google.com/thumbnail?id=1vRDUiJX49vx9UqElPHq6RVWPb95SZSqy&sz=w400" alt="封面"></div>
             <div class="item-content">
                 <h3>高一校外教學-歷史</h3>
-                <p>實地走訪古蹟與人文地景，結合在地文史脈絡與實地考察成果的整合性社會領域報告。</p>
+                <p>實地走訪古蹟與人文地景，結合在地文史脈絡與實地考察成果的整合性社會領域報告</p>
             </div>
-            <span class="btn-browse">檢視簡介</span>
+            <div class="btn-browse">檢視簡介</div>
         </div>
 
-        <div class="report-item color-yellow GSAP-card"
-             data-title="數位音樂海報美學與創意設計"
-             data-img="https://drive.google.com/thumbnail?id=1dpdQnM1cmcrcEXcJj23ksrtAhAP2ykDL&sz=w800"
-             data-desc="結合平面美學法則與數位繪圖工具，以巴哈古典音樂流派為核心概念展開創意設計。運用幾何圖形與色彩心理學，將抽象的交響樂聲部轉化為具備強烈視覺張力的現代主義設計海報。"
-             data-link="https://canva.link/z7bah2df97nga1x">
-            <div class="item-img">
-                <img src="https://drive.google.com/thumbnail?id=1dpdQnM1cmcrcEXcJj23ksrtAhAP2ykDL&sz=w400" alt="音樂海報">
-            </div>
+        <div class="report-item color-yellow" onclick="openModal('音樂海報設計', 'https://drive.google.com/thumbnail?id=1dpdQnM1cmcrcEXcJj23ksrtAhAP2ykDL&sz=w800', '本海報以我最喜愛的團體為主題，她們的作品不單是流行音樂，每首主打歌更寄託了多元的議題與價值，極具啟發性與探索價值。', 'https://canva.link/z7bah2df97nga1x')">
+            <div class="item-img"><img src="https://drive.google.com/thumbnail?id=1dpdQnM1cmcrcEXcJj23ksrtAhAP2ykDL&sz=w400" alt="封面"></div>
             <div class="item-content">
                 <h3>音樂海報設計</h3>
-                <p>結合美學與數位工具，深入剖析特定音樂流派或名家歷史的視覺創意專案。</p>
+                <p>結合美學與數位工具，深入剖析特定音樂流派和偶像的視覺創意專案</p>
             </div>
-            <span class="btn-browse">檢視簡介</span>
+            <div class="btn-browse">檢視簡介</div>
         </div>
-
     </div>
-
 </div>
 
-<!-- 🔮 簡介放大彈出視窗 (Modal) -->
-<div class="magic-modal-overlay" id="magicModal">
-    <div class="magic-modal-box">
-        <!-- 有趣的關閉按鈕 -->
-        <button class="modal-close-btn" id="modalClose"><i class="fa-solid fa-xmark"></i></button>
-        <img src="" alt="作品封面" class="modal-hero-img" id="modalImg">
-        <div class="modal-body">
-            <h2 class="modal-title" id="modalTitle">作品標題</h2>
-            <p class="modal-desc" id="modalDesc">詳細介紹內容會在這裡顯示...</p>
-            <div class="modal-footer">
-                <a href="#" target="_blank" class="modal-action-btn" id="modalLink">
-                    開啟完整 Canva 報告 <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </a>
-            </div>
+<!-- Modal 彈窗 -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+    <div class="modal-box" onclick="event.stopPropagation()">
+        <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+        <img src="" id="mImg" class="modal-img" alt="作品">
+        <div class="modal-content">
+            <h3 id="mTitle" class="modal-title"></h3>
+            <p id="mDesc" class="modal-desc"></p>
+            <a href="#" id="mLink" target="_blank" class="modal-btn">開啟完整 Canva 報告 <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
         </div>
     </div>
 </div>
 
 <footer>
-    ✦ 小龍的魔法書 ✧ 2026 學習歷程作品集 ✦
+    ✦ 龍紫綺的學習歷程作品集 ✦
 </footer>
 
-<!-- 引入 JS 套件 -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
 <script>
-    gsap.registerPlugin(ScrollTrigger);
+    function openModal(title, img, desc, link) {
+        document.getElementById('mTitle').innerText = title;
+        document.getElementById('mImg').src = img;
+        document.getElementById('mDesc').innerText = desc;
+        document.getElementById('mLink').href = link;
+        document.getElementById('modalOverlay').classList.add('active');
+    }
 
-    // ==================== 🛠️ 經典大氣輪播圖設定 (對標 IMG_0273.jpg) ====================
-    new Swiper('.hero-swiper', {
-        slidesPerView: 'auto',       // 關鍵：自動寬度，讓左右兩側微露出
-        centeredSlides: true,        // 保持目前大圖在正中央
-        spaceBetween: 25,            // 圖片之間的間隔
-        loop: true,                  // 無限循環
-        autoplay: { delay: 4000, disableOnInteraction: false },
-        pagination: { 
-            el: '.swiper-pagination', 
-            clickable: true 
-        },
-        navigation: {                // 經典左右箭頭導覽
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-    });
-
-    // 1. 首頁簡介進場
-    gsap.from("#profileCard", { opacity: 0, y: -30, scale: 0.98, duration: 1.2, ease: "power3.out" });
-
-    // 2. 滾動極光背景
-    gsap.to("#aura1", { scrollTrigger: { trigger: ".container", start: "top bottom", end: "bottom bottom", scrub: 1 }, x: 120, y: 150, scale: 1.1 });
-    gsap.to("#aura2", { scrollTrigger: { trigger: ".container", start: "top bottom", end: "bottom bottom", scrub: 1 }, x: -150, y: -120, scale: 1.2 });
-
-    // 3. 標題與手繪分隔線
-    gsap.utils.toArray('.category-title-animate').forEach(title => {
-        gsap.from(title, { scrollTrigger: { trigger: title, start: "top 92%", toggleActions: "play none none none" }, opacity: 0, y: 20, filter: "blur(6px)", duration: 0.8, ease: "power2.out" });
-    });
-    gsap.utils.toArray('.section-divider-wrapper').forEach(wrapper => {
-        const line = wrapper.querySelector('.section-divider');
-        const spark = wrapper.querySelector('.divider-spark');
-        gsap.to(line, { scrollTrigger: { trigger: wrapper, start: "top 92%", toggleActions: "play none none none" }, scaleX: 1, duration: 1, ease: "power3.inOut" });
-        gsap.to(spark, { scrollTrigger: { trigger: wrapper, start: "top 92%", toggleActions: "play none none none" }, opacity: 1, scale: 1, delay: 0.3, duration: 0.4, ease: "back.out(1.5)" });
-    });
-
-    // 4. 卡片進場
-    gsap.utils.toArray('.report-list').forEach(list => {
-        const cards = list.querySelectorAll('.GSAP-card');
-        gsap.from(cards, { scrollTrigger: { trigger: list, start: "top 90%", toggleActions: "play none none none" }, opacity: 0, scale: 0.95, y: 40, duration: 0.8, stagger: 0.12, ease: "power2.out", clearProps: "all" });
-    });
-
-    // ==================== 🔮 彈出式視窗核心 JavaScript 控制 ====================
-    const modal = document.getElementById('magicModal');
-    const modalImg = document.getElementById('modalImg');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalDesc = document.getElementById('modalDesc');
-    const modalLink = document.getElementById('modalLink');
-    const modalClose = document.getElementById('modalClose');
-
-    // 監聽所有作品卡片的點擊事件
-    document.querySelectorAll('.report-item').forEach(card => {
-        card.addEventListener('click', () => {
-            // 讀取卡片上預留的簡介資料
-            const title = card.getAttribute('data-title');
-            const img = card.getAttribute('data-img');
-            const desc = card.getAttribute('data-desc');
-            const link = card.getAttribute('data-link');
-
-            // 塞入彈窗中
-            modalTitle.textContent = title;
-            modalImg.src = img;
-            modalDesc.textContent = desc;
-            modalLink.href = link;
-
-            // 開啟彈窗（加上 active 類名觸發 CSS 動態淡入）
-            modal.classList.add('active');
-        });
-    });
-
-    // 點擊右上角關閉鍵收起彈窗
-    modalClose.addEventListener('click', (e) => { 
-        e.stopPropagation(); // 防止事件冒泡
-        modal.classList.remove('active'); 
-    });
-
-    // 點擊彈窗外部空白處自動收起
-    modal.addEventListener('click', (e) => { if (e.target === modal) { modal.classList.remove('active'); } });
-
-    // 5. 仙女棒滑鼠粒子
-    document.addEventListener('mousemove', function(e) {
-        if (Math.random() > 0.2) return; 
-        const particle = document.createElement('div');
-        particle.className = 'magic-particle';
-        const symbols = ['✦', '✧', '★'];
-        particle.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-        particle.style.left = e.clientX + 'px';
-        particle.style.top = e.clientY + 'px';
-        particle.style.fontSize = (Math.random() * 10 + 6) + 'px';
-        document.body.appendChild(particle);
-        setTimeout(() => { particle.remove(); }, 900);
-    });
+    function closeModal() {
+        document.getElementById('modalOverlay').classList.remove('active');
+    }
 </script>
 
 </body>
